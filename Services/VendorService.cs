@@ -19,7 +19,14 @@ namespace APBD_TEST_TEMPLATE.Services
             await using var transaction = (SqlTransaction)await connection.BeginTransactionAsync();
             try
             {
-
+                const string post_sql = """
+                            insert into Vendor (Code, Name) 
+                            values @Code, @Name
+                    """;
+                await using var command = new SqlCommand(post_sql, connection);
+                command.Parameters.AddWithValue("@Code", vendor.Code);
+                command.Parameters.AddWithValue("@Name", vendor.Name);
+                await command.ExecuteNonQueryAsync();
             }
             catch (Exception ex)
             {

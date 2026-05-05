@@ -28,6 +28,7 @@ namespace APBD_TEST_TEMPLATE.Controllers
         public async Task<IActionResult> AddVendor([FromBody] VendorsDto vendor)
         {
             await _vendorService.AddVendor(vendor);
+            return Ok();
         }
     }
 }
