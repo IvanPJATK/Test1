@@ -1,4 +1,5 @@
-﻿using APBD_TEST_TEMPLATE.Services;
+﻿using APBD_TEST_TEMPLATE.DTO;
+using APBD_TEST_TEMPLATE.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,11 @@ namespace APBD_TEST_TEMPLATE.Controllers
                 return BadRequest();
             }
             return Ok(vendors);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddVendor([FromBody] VendorsDto vendor)
+        {
+            await _vendorService.AddVendor(vendor);
         }
     }
 }

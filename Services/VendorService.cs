@@ -1,5 +1,6 @@
 ﻿using APBD_TEST_TEMPLATE.DTO;
 using Microsoft.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace APBD_TEST_TEMPLATE.Services
 {
@@ -10,6 +11,22 @@ namespace APBD_TEST_TEMPLATE.Services
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException();
         }
+
+        public async Task AddVendor(VendorsDto vendor)
+        {
+            await using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+            await using var transaction = (SqlTransaction)await connection.BeginTransactionAsync();
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
+        }
+
         public async Task<List<VendorsDto>> GetVendors(string? name)
         {
             var vendorsDict = new Dictionary<string, VendorsDto>();
