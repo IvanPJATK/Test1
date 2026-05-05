@@ -3,7 +3,7 @@
     public class VendorProductsDto
     {
         public int Id { get; set; }
-        public String ProductName { get; set; } = null!;
+        public string ProductName { get; set; } = null!;
         public string ProductDescription { get; set; }  = null!;
         public decimal StickerPrice { get; set; }
         public ProductTypeDto typeDto { get; set; } = null!;
